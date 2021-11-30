@@ -14,8 +14,9 @@ function load_line_plot(V_D, I_D, I_R, plt_name, save_dir)
 %   save_dir: directory to save figure
     
     load_plt = figure('units','normalized','outerposition',[0 0 0.6 0.9]);
-    plot(V_D, I_R);
     hold on
+    
+    plot(V_D, I_R);
     plot(V_D, I_D);
     
     title(['Load Line Plot, ', plt_name],'FontSize',50)
@@ -25,16 +26,7 @@ function load_line_plot(V_D, I_D, I_R, plt_name, save_dir)
     set(gca,'FontSize',20)
     set(gcf,'color','w')
 
-    thresh = 0.00005;
-    idx_intersect = find(abs(I_D - I_R) <= thresh);
-    while length(idx_intersect) ~= 1
-        if length(idx_intersect) > 1
-            thresh = thresh - 0.00001;
-        else 
-            thresh = thresh + 0.000001;
-        end
-        idx_intersect = find(abs(I_D - I_R) <= thresh);
-    end
+    [~,idx_intersect] = min(abs(I_D - I_R));
     x_intersect = V_D(idx_intersect);
     y_intersect = I_D(idx_intersect);
     

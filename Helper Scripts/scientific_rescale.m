@@ -1,4 +1,4 @@
-function [x_scaled, new_order, latex_label, console_label] = scientific_rescale(x)
+function [x_scaled, new_order, plot_label, console_label] = scientific_rescale(x)
 %SCIENTIFIC_RESCALE Rescales an input to the closest scientific order.
 %   Inputs
 %   ----------
@@ -29,7 +29,7 @@ for i = 1:length(orders)-1
     end
 end
 
-latex_label = latex_labels{x_scale_idx};
+plot_label = latex_labels{x_scale_idx};
 console_label = console_labels{x_scale_idx};
 x_scaled = x * 10^(-orders(x_scale_idx));
 end
